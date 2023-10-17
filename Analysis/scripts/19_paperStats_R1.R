@@ -67,14 +67,40 @@ diff <- rank4 %>%
 	filter(scenario == "NetZero", startDate == 1960, date == 2050) %>%
 	select(country, iso3c, `1.5C overshoot diff`=overshoot15C)
 
-reparations <- bindReparations6 %>%
-	filter(startDate == 1960) %>%
-	select(country, iso3c, `country group`=group15C, type, share, `Reparations_med`=cumReparationsAR6,
-	  `Reparations_lwr`=cumReparationsAR6lwr, `Reparations_upr`=cumReparationsAR6upr,
-	  `Reparations_perCap_med`=cumRepPerCap, `Reparations_perCap_lwr`=cumRepPerCapLwr,
-	  `Reparations_perCap_upr`=cumRepPerCapUpr) %>%
-	left_join(., diff, by =c("country", "iso3c")) %>%
-	relocate(`1.5C overshoot diff`, .after=type)
+# reparations <- bindReparations6 %>%
+# 	filter(startDate == 1960) %>%
+# 	select(country, iso3c, `country group`=group15C, type, share, `Reparations_med`=cumReparationsAR6,
+# 	  `Reparations_lwr`=cumReparationsAR6lwr, `Reparations_upr`=cumReparationsAR6upr,
+# 	  `Reparations_perCap_med`=cumRepPerCap, `Reparations_perCap_lwr`=cumRepPerCapLwr,
+# 	  `Reparations_perCap_upr`=cumRepPerCapUpr) %>%
+# 	left_join(., diff, by =c("country", "iso3c")) %>%
+# 	relocate(`1.5C overshoot diff`, .after=type)
+reparations9030 <- bindReparations6 %>%
+  filter(startDate == 1990) %>%
+  select(country, iso3c, `country group`=group15C, type, share, `Reparations_med`=cumReparationsAR6,
+         `Reparations_lwr`=cumReparationsAR6lwr, `Reparations_upr`=cumReparationsAR6upr,
+         `Reparations_perCap_med`=cumRepPerCap, `Reparations_perCap_lwr`=cumRepPerCapLwr,
+         `Reparations_perCap_upr`=cumRepPerCapUpr) %>%
+  left_join(., diff, by =c("country", "iso3c")) %>%
+  relocate(`1.5C overshoot diff`, .after=type)
+
+reparations1992 <- bindReparations6 %>%
+  filter(startDate == 1992) %>%
+  select(country, iso3c, `country group`=group15C, type, share, `Reparations_med`=cumReparationsAR6,
+         `Reparations_lwr`=cumReparationsAR6lwr, `Reparations_upr`=cumReparationsAR6upr,
+         `Reparations_perCap_med`=cumRepPerCap, `Reparations_perCap_lwr`=cumRepPerCapLwr,
+         `Reparations_perCap_upr`=cumRepPerCapUpr) %>%
+  left_join(., diff, by =c("country", "iso3c")) %>%
+  relocate(`1.5C overshoot diff`, .after=type)
+
+reparations1850 <- bindReparations6 %>%
+  filter(startDate == 1850) %>%
+  select(country, iso3c, `country group`=group15C, type, share, `Reparations_med`=cumReparationsAR6,
+         `Reparations_lwr`=cumReparationsAR6lwr, `Reparations_upr`=cumReparationsAR6upr,
+         `Reparations_perCap_med`=cumRepPerCap, `Reparations_perCap_lwr`=cumRepPerCapLwr,
+         `Reparations_perCap_upr`=cumRepPerCapUpr) %>%
+  left_join(., diff, by =c("country", "iso3c")) %>%
+  relocate(`1.5C overshoot diff`, .after=type)
 
 #fair shares
 fairShare <- overshoot5 %>%
@@ -89,8 +115,32 @@ write_csv(bauMed, "./SIdata/BAU_median_R1.csv", na="")
 write_csv(bauLow, "./SIdata/BAU_lower_R1.csv", na="")
 write_csv(bauHigh, "./SIdata/BAU_upper_R1.csv", na="")
 write_csv(netZero, "./SIdata/Net-zero_R1.csv", na="")
-write_csv(reparations, "./SIdata/Reparations_2050_R1.csv", na="")
 write_csv(fairShare, "./SIdata/Fair-shares_R1.csv", na="")
+write_csv(reparations, "./SIdata/Reparations_2050_R1.csv", na="") 
+
+
+
+
+
+##### THIS IS THE IMPORTANT FILE ####
+write_csv(reparations9030, "./SIdata/Reparations_9030.csv", na="") 
+
+
+
+
+
+
+# Cumulative compensations over 1990-2030
+sum(reparations9030$Reparations_med[reparations9030$Reparations_med > 0]) # 42.4T 
+# 104.3T if we took 2020-50 prices instead of 2020-29 - so high because 2030-50 emissions are close to zero in 1.5C scenario
+
+# Cumulative compensations over 1992-2050
+sum(reparations1992$Reparations_med[reparations1992$Reparations_med > 0]) # 109T
+# Cumulative compensations over 1850-2050
+sum(reparations1850$Reparations_med[reparations1850$Reparations_med > 0]) # 238T
+# Cumulative compensations over 1960-2050
+sum(reparations$Reparations_med[reparations$Reparations_med > 0]) # 192T
+
 
 #----------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------

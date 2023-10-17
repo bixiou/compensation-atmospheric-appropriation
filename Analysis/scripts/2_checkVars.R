@@ -18,8 +18,8 @@ is_outlierWithin1 <- function(x) {
 
 #-----------------------------------------------------------------------------------------
 #load data from script 1, if needed
-#myData <- read_csv("./myData/1_colonizingAtmosphereData_21dec2021.csv", col_types=list(col_character(), col_character(), 
-	col_double(), col_double(), col_double(), col_double(), col_double(), col_double(), col_double(), col_double()))
+# myData <- read_csv("./myData/1_colonizingAtmosphereData_21dec2021.csv", col_types=list(col_character(), col_character(),
+# 	col_double(), col_double(), col_double(), col_double(), col_double(), col_double(), col_double(), col_double()))
 #-----------------------------------------------------------------------------------------
 #Drop eora values less than 0
 myData1 <- myData %>%
@@ -312,7 +312,7 @@ countryList1990 <- myData1990 %>% count(iso3c) %>% select(iso3c)
 
 #write_csv(myData10, "001_cleanCO2-populationData_1850-2050_20211222.csv")
 #write_csv(myData1990 %>% select(country, iso3c, date, CO2foot_eora = CO2),
-  "./myData/001_cleanCO2foot_EORA_1990-2019.csv")
+  # "./myData/001_cleanCO2foot_EORA_1990-2019.csv")
 
 rm(myData, myData8, myData9, myData1990, missingCO2, missingPop, dropZero, interp, is_outlier, is_outlierWithin)
 

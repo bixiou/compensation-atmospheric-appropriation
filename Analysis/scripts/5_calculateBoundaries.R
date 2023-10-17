@@ -13,15 +13,24 @@ myData13 <- myData12 %>%
 	mutate(cumCO21850 = cumsum(ifelse(is.na(CO2), 0, CO2)) + CO2*0) %>%
 	ungroup()
 
-cum1960 <- myData13 %>%
-	filter(date >= 1960) %>%
-	select(country, iso3c, date, CO2) %>%
-	group_by(country, iso3c) %>%
-	mutate(cumCO21960 = cumsum(ifelse(is.na(CO2), 0, CO2)) + CO2*0) %>%
-	ungroup() %>%
-	select(-CO2)
+# cum1960 <- myData13 %>%
+# 	filter(date >= 1960) %>%
+# 	select(country, iso3c, date, CO2) %>%
+# 	group_by(country, iso3c) %>%
+# 	mutate(cumCO21960 = cumsum(ifelse(is.na(CO2), 0, CO2)) + CO2*0) %>%
+# 	ungroup() %>%
+# 	select(-CO2)
+# 
+# myData14 <- left_join(myData13, cum1960, by=c("country", "iso3c", "date"))
+cum9030 <- myData13 %>%
+  filter(date >= 1990 & date < 2030) %>%
+  select(country, iso3c, date, CO2) %>%
+  group_by(country, iso3c) %>%
+  mutate(cumCO29030 = cumsum(ifelse(is.na(CO2), 0, CO2)) + CO2*0) %>%
+  ungroup() %>%
+  select(-CO2)
 
-myData14 <- left_join(myData13, cum1960, by=c("country", "iso3c", "date"))
+myData14 <- left_join(myData13, cum9030, by=c("country", "iso3c", "date"))
 
 cum1992 <- myData13 %>%
 	filter(date >= 1992) %>%
@@ -42,35 +51,44 @@ cumCO2 <- myData15 %>%
 	select(-population, -CO2) %>%
 	rowwise() %>%
 	mutate(CO2_net01850 = ifelse(date==2019, cumCO21850, CO2_net0),
-		CO2_net01960 = ifelse(date==2019, cumCO21960, CO2_net0),
+		CO2_net09030 = ifelse(date==2019, cumCO29030, ifelse(date < 2030, CO2_net0, 0)),
+		# CO2_net01960 = ifelse(date==2019, cumCO21960, CO2_net0),
 		CO2_net01992 = ifelse(date==2019, cumCO21992, CO2_net0),
 		CO2_bau1850 = ifelse(date==2019, cumCO21850, CO2_bau),
-		CO2_bau1960 = ifelse(date==2019, cumCO21960, CO2_bau),
+		CO2_bau9030 = ifelse(date==2019, cumCO29030, ifelse(date < 2030, CO2_bau, 0)),
+		# CO2_bau1960 = ifelse(date==2019, cumCO21960, CO2_bau),
 		CO2_bau1992 = ifelse(date==2019, cumCO21992, CO2_bau),
 		CO2_lwr661850 = ifelse(date==2019, cumCO21850, CO2_lwr66),
-		CO2_lwr661960 = ifelse(date==2019, cumCO21960, CO2_lwr66),
+		CO2_lwr669030 = ifelse(date==2019, cumCO29030, ifelse(date < 2030, CO2_lwr66, 0)),
+		# CO2_lwr661960 = ifelse(date==2019, cumCO21960, CO2_lwr66),
 		CO2_lwr661992 = ifelse(date==2019, cumCO21992, CO2_lwr66),
 		CO2_upr661850 = ifelse(date==2019, cumCO21850, CO2_upr66),
-		CO2_upr661960 = ifelse(date==2019, cumCO21960, CO2_upr66),
+		CO2_upr669030 = ifelse(date==2019, cumCO29030, ifelse(date < 2030, CO2_upr66, 0)),
+		# CO2_upr661960 = ifelse(date==2019, cumCO21960, CO2_upr66),
 		CO2_upr661992 = ifelse(date==2019, cumCO21992, CO2_upr66)) %>%
 	ungroup() %>%
 	group_by(country, iso3c) %>%
 	mutate(cumCO2_net01850 = cumsum(ifelse(is.na(CO2_net01850), 0, CO2_net01850)) + CO2_net01850*0,
-		cumCO2_net01960 = cumsum(ifelse(is.na(CO2_net01960), 0, CO2_net01960)) + CO2_net01960*0,
+		cumCO2_net09030 = cumsum(ifelse(is.na(CO2_net09030), 0, CO2_net09030)) + CO2_net09030*0,
+		# cumCO2_net01960 = cumsum(ifelse(is.na(CO2_net01960), 0, CO2_net01960)) + CO2_net01960*0,
 		cumCO2_net01992 = cumsum(ifelse(is.na(CO2_net01992), 0, CO2_net01992)) + CO2_net01992*0,
 		cumCO2_bau1850 = cumsum(ifelse(is.na(CO2_bau1850), 0, CO2_bau1850)) + CO2_bau1850*0,
 		cumCO2_lwr661850 = cumsum(ifelse(is.na(CO2_lwr661850), 0, CO2_lwr661850)) + CO2_lwr661850*0,
 		cumCO2_upr661850 = cumsum(ifelse(is.na(CO2_upr661850), 0, CO2_upr661850)) + CO2_upr661850*0,
-		cumCO2_bau1960 = cumsum(ifelse(is.na(CO2_bau1960), 0, CO2_bau1960)) + CO2_bau1960*0,
-		cumCO2_lwr661960 = cumsum(ifelse(is.na(CO2_lwr661960), 0, CO2_lwr661960)) + CO2_lwr661960*0,
-		cumCO2_upr661960 = cumsum(ifelse(is.na(CO2_upr661960), 0, CO2_upr661960)) + CO2_upr661960*0,
+		# cumCO2_bau1960 = cumsum(ifelse(is.na(CO2_bau1960), 0, CO2_bau1960)) + CO2_bau1960*0,
+		# cumCO2_lwr661960 = cumsum(ifelse(is.na(CO2_lwr661960), 0, CO2_lwr661960)) + CO2_lwr661960*0,
+		# cumCO2_upr661960 = cumsum(ifelse(is.na(CO2_upr661960), 0, CO2_upr661960)) + CO2_upr661960*0,
+		cumCO2_bau9030 = cumsum(ifelse(is.na(CO2_bau9030), 0, CO2_bau9030)) + CO2_bau9030*0,
+		cumCO2_lwr669030 = cumsum(ifelse(is.na(CO2_lwr669030), 0, CO2_lwr669030)) + CO2_lwr669030*0,
+		cumCO2_upr669030 = cumsum(ifelse(is.na(CO2_upr669030), 0, CO2_upr669030)) + CO2_upr669030*0,
 		cumCO2_bau1992 = cumsum(ifelse(is.na(CO2_bau1992), 0, CO2_bau1992)) + CO2_bau1992*0,
 		cumCO2_lwr661992 = cumsum(ifelse(is.na(CO2_lwr661992), 0, CO2_lwr661992)) + CO2_lwr661992*0,
 		cumCO2_upr661992 = cumsum(ifelse(is.na(CO2_upr661992), 0, CO2_upr661992)) + CO2_upr661992*0) %>%
 	ungroup() %>%
 	filter(date >= 2020) %>%
 	select(country, iso3c, date, cumCO2_bau1850, cumCO2_lwr661850, cumCO2_upr661850, cumCO2_net01850, 
-		cumCO2_bau1960, cumCO2_lwr661960, cumCO2_upr661960, cumCO2_net01960,
+		cumCO2_bau9030, cumCO2_lwr669030, cumCO2_upr669030, cumCO2_net09030,
+		# cumCO2_bau1960, cumCO2_lwr661960, cumCO2_upr661960, cumCO2_net01960,
 		cumCO2_bau1992, cumCO2_lwr661992, cumCO2_upr661992, cumCO2_net01992)
 
 myData16 <- left_join(myData15, cumCO2, by=c("country", "iso3c", "date"))
@@ -82,7 +100,8 @@ rm(myData15, cumCO2)
 
 budget350 <- myData16 %>%
 	filter(iso3c == "WLD", date == 1988) %>%
-	select(budget350_1850 = cumCO21850, budget350_1960 = cumCO21960)
+	select(budget350_1850 = cumCO21850, budget350_9030 = cumCO29030#, budget350_1960 = cumCO21960
+	       )
 
 #-------------------------------------------------------------------------------------
 #Grab cumulative carbon budgets for 1.5C boundary for 1850, 1960, and 1992 equivalent to 360 Gt more than
@@ -90,7 +109,7 @@ budget350 <- myData16 %>%
 
 budget15C <- myData16 %>%
 	filter(iso3c == "WLD", date == 2030) %>%
-	select(country, date, budget15C_1850 = cumCO2_bau1850, budget15C_1960 = cumCO2_bau1960,
+	select(country, date, budget15C_1850 = cumCO2_bau1850, budget15C_9030 = cumCO2_bau9030,# budget15C_1960 = cumCO2_bau1960,
 	  budget15C_1992 = cumCO2_bau1992)
  
 #-------------------------------------------------------------------------------------
@@ -99,7 +118,7 @@ budget15C <- myData16 %>%
 
 budget2C <- myData16 %>%
 	filter(iso3c == "WLD", date == 2045) %>%
-	select(budget2C_1850 = cumCO2_bau1850, budget2C_1960 = cumCO2_bau1960,
+	select(budget2C_1850 = cumCO2_bau1850, budget2C_9030 = cumCO2_bau9030, #budget2C_1960 = cumCO2_bau1960,
 	  budget2C_1992 = cumCO2_bau1992)
 
 #Bind the boundaries into a single tibble
@@ -107,12 +126,15 @@ budgets <- cbind(budget350, budget15C, budget2C)
 
 myData17 <- myData16 %>%
 	add_column(budget350_1850 = budgets$budget350_1850,
-		budget350_1960 = budgets$budget350_1960,
+		# budget350_1960 = budgets$budget350_1960,
 		budget15C_1850 = budgets$budget15C_1850,
-		budget15C_1960 = budgets$budget15C_1960,
+		# budget15C_1960 = budgets$budget15C_1960,
 		budget15C_1992 = budgets$budget15C_1992,
 		budget2C_1850 = budgets$budget2C_1850,
-		budget2C_1960 = budgets$budget2C_1960,
+		# budget2C_1960 = budgets$budget2C_1960,
+		budget350_9030 = budgets$budget350_9030,
+		budget15C_9030 = budgets$budget15C_9030,
+		budget2C_9030 = budgets$budget2C_9030,
 		budget2C_1992 = budgets$budget2C_1992)
 
 rm(budgets, budget2C, budget15C, budget350, myData16)

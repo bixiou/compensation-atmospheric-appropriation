@@ -1,0 +1,26 @@
+{
+    "id": "224B2037",
+    "path": "~/www/compensation-atmospheric-appropriation/Analysis/scripts/5_calculateBoundaries.R",
+    "project_path": "5_calculateBoundaries.R",
+    "type": "r_source",
+    "hash": "1569747857",
+    "contents": "",
+    "dirty": true,
+    "created": 1697535453177.0,
+    "source_on_save": false,
+    "relative_order": 5,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "111,87",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1697549939,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1697549967112,
+    "read_only": false,
+    "read_only_alternatives": []
+}

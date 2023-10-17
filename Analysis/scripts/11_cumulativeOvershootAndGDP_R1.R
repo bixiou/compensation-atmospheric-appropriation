@@ -30,12 +30,18 @@ overshoot1 <- left_join(overshoot, gdp1, by=c("iso3c", "date"))
 rm(overshoot, gdp, gdp1, worldGDP)
 
 #get cumulative GDP by 1960 and 1992 start dates
-co2gdp1960 <- overshoot1 %>%
-	filter(startDate == 1960, date <= 2018, date >= 1960) %>%
+co2gdp1990 <- overshoot1 %>%
+	filter(startDate == 1990, date <= 2018, date >= 1990) %>%
 	select(startDate, country, iso3c, date, overshoot350, overshoot15C, overshoot2C, gdp) %>%
 	group_by(startDate, country, iso3c) %>%
 	mutate(cumGDP = cumsum(ifelse(is.na(gdp), 0, gdp)) + gdp*0) %>%
 	ungroup()
+# co2gdp1960 <- overshoot1 %>%
+#   filter(startDate == 1960, date <= 2018, date >= 1960) %>%
+#   select(startDate, country, iso3c, date, overshoot350, overshoot15C, overshoot2C, gdp) %>%
+#   group_by(startDate, country, iso3c) %>%
+#   mutate(cumGDP = cumsum(ifelse(is.na(gdp), 0, gdp)) + gdp*0) %>%
+#   ungroup()
 
 co2gdp1992 <- overshoot1 %>%
 	filter(startDate == 1992, date <= 2018, date >= 1992) %>%
@@ -44,7 +50,8 @@ co2gdp1992 <- overshoot1 %>%
 	mutate(cumGDP = cumsum(ifelse(is.na(gdp), 0, gdp)) + gdp*0) %>%
 	ungroup()
 
-co2gdp <- rbind(co2gdp1992, co2gdp1960)
+co2gdp <- rbind(co2gdp1992, co2gdp1990)
+# co2gdp <- rbind(co2gdp1992, co2gdp1960)
 
 rm(co2gdp1960, co2gdp1992)
 

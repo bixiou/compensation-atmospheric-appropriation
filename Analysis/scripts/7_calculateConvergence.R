@@ -11,32 +11,38 @@
 #figure out linear overshoot
 linCO2 <- myData18 %>%
 	filter(date == 2020) %>%
-	select(country, iso3c, cumStart_1850 = cumCO2_bau1850, cumStart_1960 = cumCO2_bau1960,
-	  cumStart_1992 = cumCO2_bau1992, fairShare350_1850, fairShare350_1960,
-	  fairShare15C_1850, fairShare15C_1960, fairShare15C_1992,
-	  fairShare2C_1850, fairShare2C_1960, fairShare2C_1992) %>%
+	select(country, iso3c, cumStart_1850 = cumCO2_bau1850, cumStart_9030 = cumCO2_bau9030, #cumStart_1960 = cumCO2_bau1960,
+	  cumStart_1992 = cumCO2_bau1992, fairShare350_1850, fairShare350_9030, #fairShare350_1960,
+	  fairShare15C_1850, fairShare15C_9030, fairShare15C_1992, #fairShare15C_1960, 
+	  fairShare2C_1850, fairShare2C_9030, fairShare2C_1992) %>% #fairShare2C_1960, 
 	rowwise() %>%
 	mutate(cumOvershoot350_1850 = fairShare350_1850 - cumStart_1850,
 		cumOvershoot15C_1850 = fairShare15C_1850 - cumStart_1850,
 		cumOvershoot2C_1850 = fairShare2C_1850 - cumStart_1850,
-		cumOvershoot350_1960 = fairShare350_1960 - cumStart_1960,
-		cumOvershoot15C_1960 = fairShare15C_1960 - cumStart_1960,
-		cumOvershoot2C_1960 = fairShare2C_1960 - cumStart_1960,
+		cumOvershoot350_9030 = fairShare350_9030 - cumStart_9030,
+		cumOvershoot15C_9030 = fairShare15C_9030 - cumStart_9030,
+		cumOvershoot2C_9030 = fairShare2C_9030 - cumStart_9030,
+		# cumOvershoot350_1960 = fairShare350_1960 - cumStart_1960,
+		# cumOvershoot15C_1960 = fairShare15C_1960 - cumStart_1960,
+		# cumOvershoot2C_1960 = fairShare2C_1960 - cumStart_1960,
 		cumOvershoot15C_1992 = fairShare15C_1992 - cumStart_1992,
 		cumOvershoot2C_1992 = fairShare2C_1992 - cumStart_1992,
 		linOvershoot350_1850 = ifelse(cumOvershoot350_1850 < 0, cumOvershoot350_1850/30, NA),
 		linOvershoot15C_1850 = ifelse(cumOvershoot15C_1850 < 0, cumOvershoot15C_1850/30, NA),
 		linOvershoot2C_1850 = ifelse(cumOvershoot2C_1850 < 0, cumOvershoot2C_1850/30, NA),
-		linOvershoot350_1960 = ifelse(cumOvershoot350_1960 < 0, cumOvershoot350_1960/30, NA),
-		linOvershoot15C_1960 = ifelse(cumOvershoot15C_1960 < 0, cumOvershoot15C_1960/30, NA),
-		linOvershoot2C_1960 = ifelse(cumOvershoot2C_1960 < 0, cumOvershoot2C_1960/30, NA),
+		linOvershoot350_9030 = ifelse(cumOvershoot350_9030 < 0, cumOvershoot350_9030/10, NA),
+		linOvershoot15C_9030 = ifelse(cumOvershoot15C_9030 < 0, cumOvershoot15C_9030/10, NA),
+		linOvershoot2C_9030 = ifelse(cumOvershoot2C_9030 < 0, cumOvershoot2C_9030/10, NA),
+		# linOvershoot350_1960 = ifelse(cumOvershoot350_1960 < 0, cumOvershoot350_1960/30, NA),
+		# linOvershoot15C_1960 = ifelse(cumOvershoot15C_1960 < 0, cumOvershoot15C_1960/30, NA),
+		# linOvershoot2C_1960 = ifelse(cumOvershoot2C_1960 < 0, cumOvershoot2C_1960/30, NA),
 		linOvershoot15C_1992 = ifelse(cumOvershoot15C_1992 < 0, cumOvershoot15C_1992/30, NA),
 		linOvershoot2C_1992 = ifelse(cumOvershoot2C_1992 < 0, cumOvershoot2C_1992/30, NA)) %>%
 	ungroup() %>%
-	select(-fairShare350_1850, -fairShare350_1960, -fairShare15C_1850, -fairShare15C_1960,
-		-fairShare15C_1992, -fairShare2C_1850, -fairShare2C_1960, , -fairShare2C_1992, 
-		-cumOvershoot350_1850, -cumOvershoot350_1960, -cumOvershoot15C_1850, -cumOvershoot15C_1960, 
-		-cumOvershoot15C_1992, -cumOvershoot2C_1850, -cumOvershoot2C_1960, -cumOvershoot2C_1992)
+	select(-fairShare350_1850, -fairShare350_9030, -fairShare15C_1850, -fairShare15C_9030, # -fairShare350_1960, -fairShare15C_1960,
+		-fairShare15C_1992, -fairShare2C_1850, -fairShare2C_9030, -fairShare2C_1992, # -fairShare2C_1960
+		-cumOvershoot350_1850, -cumOvershoot350_9030, -cumOvershoot15C_1850, -cumOvershoot15C_9030, #  -cumOvershoot350_1960,  -cumOvershoot15C_1960, 
+		-cumOvershoot15C_1992, -cumOvershoot2C_1850, -cumOvershoot2C_9030, -cumOvershoot2C_1992) #-cumOvershoot2C_1960, 
 
 CO2_neg <- myData18 %>%
 	filter(date >= 2020) %>%
@@ -49,20 +55,26 @@ CO2_neg <- myData18 %>%
 			linOvershoot15C_1850*t + cumStart_1850),
 		cumNeg2C_1850 = ifelse(is.na(linOvershoot2C_1850), NA,
 			linOvershoot2C_1850*t + cumStart_1850),
-		cumNeg350_1960 = ifelse(is.na(linOvershoot350_1960), NA,
-			linOvershoot350_1960*t + cumStart_1960),
-		cumNeg15C_1960 = ifelse(is.na(linOvershoot15C_1960), NA,
-			linOvershoot15C_1960*t + cumStart_1960),
-		cumNeg2C_1960 = ifelse(is.na(linOvershoot2C_1960), NA,
-			linOvershoot2C_1960*t + cumStart_1960),
+		# cumNeg350_1960 = ifelse(is.na(linOvershoot350_1960), NA,
+		#                         linOvershoot350_1960*t + cumStart_1960),
+		# cumNeg15C_1960 = ifelse(is.na(linOvershoot15C_1960), NA,
+		#                         linOvershoot15C_1960*t + cumStart_1960),
+		# cumNeg2C_1960 = ifelse(is.na(linOvershoot2C_1960), NA,
+		#                        linOvershoot2C_1960*t + cumStart_1960),
+		cumNeg350_9030 = ifelse(is.na(linOvershoot350_9030), NA,
+			linOvershoot350_9030*t + cumStart_9030),
+		cumNeg15C_9030 = ifelse(is.na(linOvershoot15C_9030), NA,
+			linOvershoot15C_9030*t + cumStart_9030),
+		cumNeg2C_9030 = ifelse(is.na(linOvershoot2C_9030), NA,
+			linOvershoot2C_9030*t + cumStart_9030),
 		cumNeg15C_1992 = ifelse(is.na(linOvershoot15C_1992), NA,
 			linOvershoot15C_1992*t + cumStart_1992),
 		cumNeg2C_1992 = ifelse(is.na(linOvershoot2C_1992), NA,
 			linOvershoot2C_1992*t + cumStart_1992)) %>%
 	ungroup() %>%
-	select(country, iso3c, date, cumNeg350_1850, cumNeg350_1960, 
-	  cumNeg15C_1850, cumNeg15C_1960, cumNeg15C_1992,
-	  cumNeg2C_1850, cumNeg2C_1960, cumNeg2C_1992)
+	select(country, iso3c, date, cumNeg350_1850, cumNeg350_9030, # cumNeg350_1960, 
+	  cumNeg15C_1850, cumNeg15C_9030, cumNeg15C_1992,# cumNeg15C_1960, 
+	  cumNeg2C_1850, cumNeg2C_9030, cumNeg2C_1992)#cumNeg2C_1960, 
 
 myData19 <- left_join(myData18, CO2_neg, by=c("country", "iso3c", "date"))
 

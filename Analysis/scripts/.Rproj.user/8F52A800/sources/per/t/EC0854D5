@@ -1,0 +1,26 @@
+{
+    "id": "EC0854D5",
+    "path": "~/www/compensation-atmospheric-appropriation/Analysis/scripts/1_setupWrangle.R",
+    "project_path": "1_setupWrangle.R",
+    "type": "r_source",
+    "hash": "1461690301",
+    "contents": "",
+    "dirty": false,
+    "created": 1697535446128.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "15,0",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1697536538,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1697536538534,
+    "read_only": false,
+    "read_only_alternatives": []
+}

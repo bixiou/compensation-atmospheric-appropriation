@@ -18,16 +18,24 @@ nationalPop1850 <- myData17 %>%
 		budget2C_1850 = mean(budget2C_1850, na.rm =T)) %>%
 	ungroup()
 
-nationalPop1960 <- myData17 %>%
-	filter(date >= 1960) %>%
-	group_by(country, iso3c) %>%
-	summarise(avgPop_19602050 = mean(population, na.rm=T),
-		budget350_1960 = mean(budget350_1960, na.rm =T),
-		budget15C_1960 = mean(budget15C_1960, na.rm =T),
-		budget2C_1960 = mean(budget2C_1960, na.rm =T)) %>%
-	ungroup()
+# nationalPop1960 <- myData17 %>%
+# 	filter(date >= 1960) %>%
+# 	group_by(country, iso3c) %>%
+# 	summarise(avgPop_19602050 = mean(population, na.rm=T),
+# 		budget350_1960 = mean(budget350_1960, na.rm =T),
+# 		budget15C_1960 = mean(budget15C_1960, na.rm =T),
+# 		budget2C_1960 = mean(budget2C_1960, na.rm =T)) %>%
+# 	ungroup()
+nationalPop9030 <- myData17 %>%
+  filter(date >= 1990 & date < 2030) %>%
+  group_by(country, iso3c) %>%
+  summarise(avgPop_19902030 = mean(population, na.rm=T),
+            budget350_9030 = mean(budget350_9030, na.rm =T),
+            budget15C_9030 = mean(budget15C_9030, na.rm =T),
+            budget2C_9030 = mean(budget2C_9030, na.rm =T)) %>%
+  ungroup()
 
-nationalPop <- left_join(nationalPop1850, nationalPop1960, by=c("country", "iso3c"))
+nationalPop <- left_join(nationalPop1850, nationalPop9030, by=c("country", "iso3c"))
 
 nationalPop1992 <- myData17 %>%
 	filter(date >= 1992) %>%
@@ -44,11 +52,13 @@ rm(nationalPop1850, nationalPop1960, nationalPop1992, nationalPop)
 
 worldPop <- nationalPop1 %>%
 	filter(iso3c == "WLD") %>%
-	select(avgPop_18502050, avgPop_19602050, avgPop_19922050)
+  select(avgPop_18502050, avgPop_19902030, avgPop_19922050)
+	# select(avgPop_18502050, avgPop_19602050, avgPop_19922050)
 
 nationalPop2 <- nationalPop1 %>% 
 	add_column(avgWLDpop18502050 = worldPop$avgPop_18502050,
-		avgWLDpop19602050 = worldPop$avgPop_19602050,
+		avgWLDpop19902030 = worldPop$avgPop_19902030,
+		# avgWLDpop19602050 = worldPop$avgPop_19602050,
 		avgWLDpop19922050 = worldPop$avgPop_19922050)
 
 
@@ -58,38 +68,45 @@ rm(worldPop, nationalPop1)
 fairShares <- nationalPop2 %>%
 	rowwise() %>%
 	mutate(popShare_1850 = avgPop_18502050/avgWLDpop18502050,
-		popShare_1960 = avgPop_19602050/avgWLDpop19602050,
+		popShare_9030 = avgPop_19902030/avgWLDpop19902030,
+		# popShare_1960 = avgPop_19602050/avgWLDpop19602050,
 		popShare_1992 = avgPop_19922050/avgWLDpop19922050,
 		fairShare350_1850 = budget350_1850*(avgPop_18502050/avgWLDpop18502050),
 		fairShare15C_1850 = budget15C_1850*(avgPop_18502050/avgWLDpop18502050),
 		fairShare2C_1850 = budget2C_1850*(avgPop_18502050/avgWLDpop18502050),
-		fairShare350_1960 = budget350_1960*(avgPop_19602050/avgWLDpop19602050),
-		fairShare15C_1960 = budget15C_1960*(avgPop_19602050/avgWLDpop19602050),
-		fairShare2C_1960 = budget2C_1960*(avgPop_19602050/avgWLDpop19602050),
+		# fairShare350_1960 = budget350_1960*(avgPop_19602050/avgWLDpop19602050),
+		# fairShare15C_1960 = budget15C_1960*(avgPop_19602050/avgWLDpop19602050),
+		# fairShare2C_1960 = budget2C_1960*(avgPop_19602050/avgWLDpop19602050),
+		fairShare350_9030 = budget350_9030*(avgPop_19902030/avgWLDpop19902030),
+		fairShare15C_9030 = budget15C_9030*(avgPop_19902030/avgWLDpop19902030),
+		fairShare2C_9030 = budget2C_9030*(avgPop_19902030/avgWLDpop19902030),
 		fairShare15C_1992 = budget15C_1992*(avgPop_19922050/avgWLDpop19922050),
 		fairShare2C_1992 = budget2C_1992*(avgPop_19922050/avgWLDpop19922050)) %>%
 	ungroup() %>%
-	select(country, iso3c, popShare_1850, popShare_1960, popShare_1992,
-	  fairShare350_1850, fairShare350_1960, fairShare15C_1850, fairShare15C_1960, fairShare15C_1992, 
-	  fairShare2C_1850, fairShare2C_1960, fairShare2C_1992)
+	select(country, iso3c, popShare_1850, popShare_9030, popShare_1992, # popShare_1960,
+	  fairShare350_1850, fairShare350_9030, fairShare15C_1850, fairShare15C_9030, fairShare15C_1992, # fairShare350_1960, fairShare15C_1960, 
+	  fairShare2C_1850, fairShare2C_9030, fairShare2C_1992) # fairShare2C_1960, 
 
 #Prep for visualising facets
 popShare <- fairShares %>%
-	select(country, iso3c, fairShare_1850 = popShare_1850, fairShare_1960 = popShare_1960,
+	select(country, iso3c, fairShare_1850 = popShare_1850, fairShare_9030 = popShare_9030, #fairShare_1960 = popShare_1960,
 	  fairShare_1992 = popShare_1992) %>%
 	add_column(group="populationShare")
 
 fairShare350 <- fairShares %>%
-	select(country, iso3c, fairShare_1850 = fairShare350_1850, fairShare_1960 = fairShare350_1960) %>%
+	select(country, iso3c, fairShare_1850 = fairShare350_1850, fairShare_9030 = fairShare350_9030) %>%
+  # select(country, iso3c, fairShare_1850 = fairShare350_1850, fairShare_1960 = fairShare350_1960) %>%
 	add_column(fairShare_1992 = NA, group="fairShare350")
 
 fairShare15C <- fairShares %>%
-	select(country, iso3c, fairShare_1850 = fairShare15C_1850, fairShare_1960 = fairShare15C_1960,
+	select(country, iso3c, fairShare_1850 = fairShare15C_1850, fairShare_9030 = fairShare15C_9030,
+	# select(country, iso3c, fairShare_1850 = fairShare15C_1850, fairShare_1960 = fairShare15C_1960,
 	  fairShare_1992 = fairShare15C_1992) %>%
 	add_column(group="fairShare15C")
 
 fairShare2C <- fairShares %>%
-	select(country, iso3c, fairShare_1850 = fairShare2C_1850, fairShare_1960 = fairShare2C_1960,
+	select(country, iso3c, fairShare_1850 = fairShare2C_1850, fairShare_9030 = fairShare2C_9030,
+	# select(country, iso3c, fairShare_1850 = fairShare2C_1850, fairShare_1960 = fairShare2C_1960,
 	  fairShare_1992 = fairShare2C_1992) %>%
 	add_column(group="fairShare2C")
 
@@ -101,7 +118,8 @@ rm(popShare, fairShare350, fairShare15C, fairShare2C)
 #Calculate ratios between different periods
 fairShares2 <- fairShares1 %>% 
 	rowwise() %>%
-	mutate(ratio19601850 = fairShare_1960 / fairShare_1850,
+	mutate(#ratio19601850 = fairShare_1960 / fairShare_1850,
+	       ratio90301992 = fairShare_9030 / fairShare_1992,
 	  ratio19921850 = fairShare_1992 / fairShare_1850) %>%
 	ungroup()
 

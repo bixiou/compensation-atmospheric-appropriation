@@ -1,7 +1,7 @@
 ## This script calculates country-level net zero pathways
 
 #Read in datafile from previous script (if needed), and drop Estonia and Trinidad
-#myData11 <- read_csv("./myData/03_CO2-BAU_v1.csv") %>%
+myData11 <- read_csv("./myData/03_CO2-BAU_v1.csv") %>%
 	filter(!iso3c %in% c("EST", "TTO"))
 #--------------------------------------------------------------------------------------
 

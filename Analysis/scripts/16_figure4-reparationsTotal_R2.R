@@ -33,19 +33,26 @@ rm(overshoot2, mac)
 #Calculate linear overshoot slope, 2020-2050
 linCO2 <- myData21 %>%
 	filter(date == 2050) %>%
-	select(country, iso3c, cumNetZeroEnd_1850 = cumCO2_net01850, cumNetZeroEnd_1960 = cumCO2_net01960,
-		cumNetZeroEnd_1992 = cumCO2_net01992, fairShare15C_1850, fairShare15C_1960, fairShare15C_1992) %>%
+	select(country, iso3c, cumNetZeroEnd_1850 = cumCO2_net01850, cumNetZeroEnd_9030 = cumCO2_net09030, # cumNetZeroEnd_1960 = cumCO2_net01960,
+		cumNetZeroEnd_1992 = cumCO2_net01992, fairShare15C_1850, fairShare15C_9030, fairShare15C_1992) %>% # fairShare15C_1960,
 	rowwise() %>%
 	mutate(cumOvershoot15C_1850 = fairShare15C_1850 - cumNetZeroEnd_1850,
-		cumOvershoot15C_1960 = fairShare15C_1960 - cumNetZeroEnd_1960,
+		cumOvershoot15C_9030 = fairShare15C_9030 - cumNetZeroEnd_9030,
+		# cumOvershoot15C_1960 = fairShare15C_1960 - cumNetZeroEnd_1960,
 		cumOvershoot15C_1992 = fairShare15C_1992 - cumNetZeroEnd_1992,
 		annOvershoot15C_1850 = ifelse(cumOvershoot15C_1850 < 0, cumOvershoot15C_1850/31, NA),
-		annOvershoot15C_1960 = ifelse(cumOvershoot15C_1960 < 0, cumOvershoot15C_1960/31, NA),
+		# annOvershoot15C_9030 = ifelse(cumOvershoot15C_9030 < 0, cumOvershoot15C_9030/11, NA),
+		annOvershoot15C_9030 = ifelse(cumOvershoot15C_9030 < 0, cumOvershoot15C_9030/31, NA),
+		# annOvershoot15C_1960 = ifelse(cumOvershoot15C_1960 < 0, cumOvershoot15C_1960/31, NA),
 		annOvershoot15C_1992 = ifelse(cumOvershoot15C_1992 < 0, cumOvershoot15C_1992/31, NA)) %>%
 	ungroup() %>%
-	select(-fairShare15C_1850, -fairShare15C_1960, -fairShare15C_1992, 
-	  -cumOvershoot15C_1850, -cumOvershoot15C_1960, -cumOvershoot15C_1992, 
-		-cumNetZeroEnd_1850, -cumNetZeroEnd_1960, -cumNetZeroEnd_1992)
+	select(-fairShare15C_1850, -fairShare15C_9030, -fairShare15C_1992, # -fairShare15C_1960,
+	  -cumOvershoot15C_1850, -cumOvershoot15C_9030, -cumOvershoot15C_1992, #-cumOvershoot15C_1960, 
+		-cumNetZeroEnd_1850, -cumNetZeroEnd_9030, -cumNetZeroEnd_1992)#-cumNetZeroEnd_1960, 
+
+# myData22 <- myData21 %>%
+#   filter(date >= 2020) %>%
+#   left_join(linCO2, by=c("country", "iso3c"))
 
 reparations <- myData21 %>%
 	filter(date >= 2020) %>%
@@ -57,12 +64,24 @@ reparations <- myData21 %>%
 			abs(annOvershoot15C_1850*(AR6Cprice_lwr*1000))),
 		reparations15C_1850_upr = ifelse(is.na(annOvershoot15C_1850), NA,
 			abs(annOvershoot15C_1850*(AR6Cprice_upr*1000))),
-		reparations15C_1960 = ifelse(is.na(annOvershoot15C_1960), NA,
-			abs(annOvershoot15C_1960*(AR6Cprice*1000))),
-		reparations15C_1960_lwr = ifelse(is.na(annOvershoot15C_1960), NA,
-			abs(annOvershoot15C_1960*(AR6Cprice_lwr*1000))),
-		reparations15C_1960_upr = ifelse(is.na(annOvershoot15C_1960), NA,
-			abs(annOvershoot15C_1960*(AR6Cprice_upr*1000))),
+		# reparations15C_9030 = ifelse(is.na(annOvershoot15C_9030), NA,
+		#   abs(annOvershoot15C_9030*(AR6Cprice*1000)*(date < 2030))),
+		# reparations15C_9030_lwr = ifelse(is.na(annOvershoot15C_9030), NA,
+		#   abs(annOvershoot15C_9030*(AR6Cprice_lwr*1000)*(date < 2030))),
+		# reparations15C_9030_upr = ifelse(is.na(annOvershoot15C_9030), NA,
+		#   abs(annOvershoot15C_9030*(AR6Cprice_upr*1000)*(date < 2030))),
+		reparations15C_9030 = ifelse(is.na(annOvershoot15C_9030), NA,
+			abs(annOvershoot15C_9030*(AR6Cprice*1000))),
+		reparations15C_9030_lwr = ifelse(is.na(annOvershoot15C_9030), NA,
+			abs(annOvershoot15C_9030*(AR6Cprice_lwr*1000))),
+		reparations15C_9030_upr = ifelse(is.na(annOvershoot15C_9030), NA,
+			abs(annOvershoot15C_9030*(AR6Cprice_upr*1000))),
+		# reparations15C_1960 = ifelse(is.na(annOvershoot15C_1960), NA,
+		#                              abs(annOvershoot15C_1960*(AR6Cprice*1000))),
+		# reparations15C_1960_lwr = ifelse(is.na(annOvershoot15C_1960), NA,
+		#                                  abs(annOvershoot15C_1960*(AR6Cprice_lwr*1000))),
+		# reparations15C_1960_upr = ifelse(is.na(annOvershoot15C_1960), NA,
+		#                                  abs(annOvershoot15C_1960*(AR6Cprice_upr*1000))),
 		reparations15C_1992 = ifelse(is.na(annOvershoot15C_1992), NA,
 			abs(annOvershoot15C_1992*(AR6Cprice*1000))),
 		reparations15C_1992_lwr = ifelse(is.na(annOvershoot15C_1992), NA,
@@ -71,7 +90,8 @@ reparations <- myData21 %>%
 			abs(annOvershoot15C_1992*(AR6Cprice_upr*1000)))) %>%
 	ungroup() %>%
 	select(country, iso3c, date, reparations15C_1850, reparations15C_1850_lwr, reparations15C_1850_upr, 
-		reparations15C_1960, reparations15C_1960_lwr, reparations15C_1960_upr,
+		reparations15C_9030, reparations15C_9030_lwr, reparations15C_9030_upr,
+		# reparations15C_1960, reparations15C_1960_lwr, reparations15C_1960_upr,
 		reparations15C_1992, reparations15C_1992_lwr, reparations15C_1992_upr)
 
 rm(linCO2)
@@ -86,11 +106,16 @@ rep1850 <- reparations %>%
 	relocate(startDate, scenario)
 
 #1960
-rep1960 <- reparations %>%
-	select(country, iso3c, date, reparationsAR6 = reparations15C_1960, reparationsAR6lwr = reparations15C_1960_lwr,
-	  reparationsAR6upr = reparations15C_1960_upr) %>%
-	add_column(startDate = 1960, scenario = "NetZero") %>%
+rep9030 <- reparations %>%
+	select(country, iso3c, date, reparationsAR6 = reparations15C_9030, reparationsAR6lwr = reparations15C_9030_lwr,
+	  reparationsAR6upr = reparations15C_9030_upr) %>%
+	add_column(startDate = 1990, scenario = "NetZero") %>%
 	relocate(startDate, scenario)
+# rep1960 <- reparations %>%
+#   select(country, iso3c, date, reparationsAR6 = reparations15C_1960, reparationsAR6lwr = reparations15C_1960_lwr,
+#          reparationsAR6upr = reparations15C_1960_upr) %>%
+#   add_column(startDate = 1960, scenario = "NetZero") %>%
+#   relocate(startDate, scenario)
 
 #1992
 rep1992 <- reparations %>%
@@ -99,7 +124,8 @@ rep1992 <- reparations %>%
 	add_column(startDate = 1992, scenario = "NetZero") %>%
 	relocate(startDate, scenario)
 
-rep <- rbind(rep1992, rep1960, rep1850)
+rep <- rbind(rep1992, rep9030, rep1850)
+# rep <- rbind(rep1992, rep1960, rep1850)
 rm(rep1850, rep1960, rep1992)
 
 #Join with overshoot3
@@ -130,9 +156,9 @@ rm(rank3)
 #------------------------------------------------------------------------------------------------------------
 #					write to file
 #------------------------------------------------------------------------------------------------------------
-#write_csv(overshoot5, "./myData/16_myDataOvershootGDPreparations_v4.csv")
-#write_csv(myData21, "./myData/16_myDataCprice_v4.csv")
-#write_csv(rank4, "./myData/16_countryOvershootShareReparations-1850-2050_v4.csv")
+# write_csv(overshoot5, "./myData/16_myDataOvershootGDPreparations_v4.csv")
+# write_csv(myData21, "./myData/16_myDataCprice_v4.csv")
+# write_csv(rank4, "./myData/16_countryOvershootShareReparations-1850-2050_v4.csv")
 #------------------------------------------------------------------------------------------------------------
 #					PREP SUMMARY GROUPS
 #------------------------------------------------------------------------------------------------------------
@@ -305,8 +331,8 @@ shareData1 <- shareData %>%
 	rowwise() %>%
 	mutate(labelNum = paste0(group15C, "\n($", round(cumReparations/1000000000000, digits=0)," trillion)"),
 	  labelNum1 = paste0(group15C, "\n(", round(share, digits=0), "%)"),
-	  startLabel = ifelse(startDate == 1992, "1992–2050", ifelse(startDate == 1960, "1960–2050", "1850–2050")),
-	  startLabel = factor(startLabel, levels =c("1992–2050", "1960–2050", "1850–2050"))) %>%
+	  startLabel = ifelse(startDate == 1992, "1992?2050", ifelse(startDate == 1960, "1960?2050", "1850?2050")),
+	  startLabel = factor(startLabel, levels =c("1992?2050", "1960?2050", "1850?2050"))) %>%
 	ungroup() %>%
 	group_by(startDate) %>%
 	mutate(type = factor(type, levels=c("Overemitters", "Within fair shares"))) %>%

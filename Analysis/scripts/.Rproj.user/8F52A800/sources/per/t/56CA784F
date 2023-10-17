@@ -1,0 +1,26 @@
+{
+    "id": "56CA784F",
+    "path": "~/www/compensation-atmospheric-appropriation/Analysis/scripts/16_figure4-reparationsTotal_R2.R",
+    "project_path": "16_figure4-reparationsTotal_R2.R",
+    "type": "r_source",
+    "hash": "1370560753",
+    "contents": "",
+    "dirty": true,
+    "created": 1697539648589.0,
+    "source_on_save": false,
+    "relative_order": 11,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "402,0",
+        "scrollLine": "377"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1697553182,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1697553811109,
+    "read_only": false,
+    "read_only_alternatives": []
+}

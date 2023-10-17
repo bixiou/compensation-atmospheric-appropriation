@@ -1,0 +1,26 @@
+{
+    "id": "BCD1F2F1",
+    "path": "~/www/compensation-atmospheric-appropriation/Analysis/scripts/19_paperStats_R1.R",
+    "project_path": "19_paperStats_R1.R",
+    "type": "r_source",
+    "hash": "940667367",
+    "contents": "",
+    "dirty": false,
+    "created": 1697539347703.0,
+    "source_on_save": false,
+    "relative_order": 14,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "134,0",
+        "scrollLine": "118"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1697553466,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1697553466719,
+    "read_only": false,
+    "read_only_alternatives": []
+}

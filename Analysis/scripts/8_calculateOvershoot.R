@@ -92,84 +92,162 @@ rm(overshoot1850_hist, overshoot1850_bau, overshoot1850_net0, overshoot1850_neg1
 # Calculate national cumulative overshoot from 1960 for each country (and world)
 #------------------------------------------------------------------------------------------------------------
 
-overshoot1960_hist <- myData20 %>%
-	filter(date >= 1960, date <= 2019) %>%
-	select(country, iso3c, date, cumCO2 = cumCO21960, fairShare350 = fairShare350_1960,
-		fairShare15C = fairShare15C_1960, fairShare2C = fairShare2C_1960, northAndRegions, 
-		northSouth, annex1) %>%
-	add_column(startDate = 1960, scenario = "Historical") %>%
-	relocate(startDate, scenario) %>%
-	rowwise() %>%
-	mutate(overshoot350 = cumCO2 / fairShare350,
-		overshoot15C = cumCO2 / fairShare15C,
-		overshoot2C = cumCO2 / fairShare2C) %>%
-	ungroup()
+# overshoot1960_hist <- myData20 %>%
+# 	filter(date >= 1960, date <= 2019) %>%
+# 	select(country, iso3c, date, cumCO2 = cumCO21960, fairShare350 = fairShare350_1960,
+# 		fairShare15C = fairShare15C_1960, fairShare2C = fairShare2C_1960, northAndRegions, 
+# 		northSouth, annex1) %>%
+# 	add_column(startDate = 1960, scenario = "Historical") %>%
+# 	relocate(startDate, scenario) %>%
+# 	rowwise() %>%
+# 	mutate(overshoot350 = cumCO2 / fairShare350,
+# 		overshoot15C = cumCO2 / fairShare15C,
+# 		overshoot2C = cumCO2 / fairShare2C) %>%
+# 	ungroup()
+# 
+# overshoot1960_bau <- myData20 %>%
+# 	filter(date >= 2020) %>%
+# 	select(country, iso3c, date, cumCO2 = cumCO2_bau1960, fairShare350 = fairShare350_1960,
+# 		fairShare15C = fairShare15C_1960, fairShare2C = fairShare2C_1960, northAndRegions, 
+# 		northSouth, annex1) %>%
+# 	add_column(startDate = 1960, scenario = "BAU") %>%
+# 	relocate(startDate, scenario) %>%
+# 	rowwise() %>%
+# 	mutate(overshoot350 = cumCO2 / fairShare350,
+# 		overshoot15C = cumCO2 / fairShare15C,
+# 		overshoot2C = cumCO2 / fairShare2C) %>%
+# 	ungroup()
+# 
+# overshoot1960_net0 <- myData20 %>%
+# 	filter(date >= 2020) %>%
+# 	select(country, iso3c, date, cumCO2 = cumCO2_net01960, fairShare350 = fairShare350_1960,
+# 		fairShare15C = fairShare15C_1960, fairShare2C = fairShare2C_1960, northAndRegions, 
+# 		northSouth, annex1) %>%
+# 	add_column(startDate = 1960, scenario = "NetZero") %>%
+# 	relocate(startDate, scenario) %>%
+# 	rowwise() %>%
+# 	mutate(overshoot350 = cumCO2 / fairShare350,
+# 		overshoot15C = cumCO2 / fairShare15C,
+# 		overshoot2C = cumCO2 / fairShare2C) %>%
+# 	ungroup()
+# 
+# overshoot1960_neg15C <- myData20 %>%
+# 	filter(date >= 2020) %>%
+# 	select(country, iso3c, date, cumCO2 = cumNeg15C_1960, fairShare350 = fairShare350_1960,
+# 		fairShare15C = fairShare15C_1960, fairShare2C = fairShare2C_1960, northAndRegions, 
+# 		northSouth, annex1) %>%
+# 	add_column(startDate = 1960, scenario = "Converge15C") %>%
+# 	relocate(startDate, scenario) %>%
+# 	rowwise() %>%
+# 	mutate(overshoot350 = NA,
+# 		overshoot15C = cumCO2 / fairShare15C,
+# 		overshoot2C = NA) %>%
+# 	ungroup()
+# 
+# #merge
+# overshoot1960 <- rbind(overshoot1960_hist, overshoot1960_bau, overshoot1960_net0, overshoot1960_neg15C)
+# 
+# overshoot1960_ribbon <- myData20 %>%
+# 	filter(date >= 2020) %>%
+# 	select(country, iso3c, date, cumCO2_lwr = cumCO2_lwr661960, cumCO2_upr = cumCO2_upr661960,
+# 		fairShare350 = fairShare350_1960, fairShare15C = fairShare15C_1960, 
+# 		fairShare2C = fairShare2C_1960) %>%
+# 	add_column(startDate = 1960, scenario = "BAU") %>%
+# 	relocate(startDate, scenario) %>%
+# 	rowwise() %>%
+# 	mutate(overshoot350lwr = cumCO2_lwr / fairShare350,
+# 		overshoot350upr = cumCO2_upr / fairShare350,
+# 		overshoot15Clwr = cumCO2_lwr / fairShare15C,
+# 		overshoot15Cupr = cumCO2_upr / fairShare15C,
+# 		overshoot2Clwr = cumCO2_lwr / fairShare2C,
+# 		overshoot2Cupr = cumCO2_upr / fairShare2C) %>%
+# 	ungroup() %>%
+# 	select(-fairShare350, -fairShare15C, -fairShare2C)
+# 
+# overshoot1960 <- left_join(overshoot1960, overshoot1960_ribbon, by=c("startDate", "scenario", "country",
+# 	"iso3c", "date")) %>%
+# 	relocate(northAndRegions, northSouth, annex1, .after=iso3c)
+# 
+# #clean up
+# rm(overshoot1960_hist, overshoot1960_bau, overshoot1960_net0, overshoot1960_neg15C, overshoot1960_ribbon)
+overshoot9030_hist <- myData20 %>%
+  filter(date >= 1990, date <= 2019) %>%
+  select(country, iso3c, date, cumCO2 = cumCO29030, fairShare350 = fairShare350_9030,
+         fairShare15C = fairShare15C_9030, fairShare2C = fairShare2C_9030, northAndRegions, 
+         northSouth, annex1) %>%
+  add_column(startDate = 9030, scenario = "Historical") %>%
+  relocate(startDate, scenario) %>%
+  rowwise() %>%
+  mutate(overshoot350 = cumCO2 / fairShare350,
+         overshoot15C = cumCO2 / fairShare15C,
+         overshoot2C = cumCO2 / fairShare2C) %>%
+  ungroup()
 
-overshoot1960_bau <- myData20 %>%
-	filter(date >= 2020) %>%
-	select(country, iso3c, date, cumCO2 = cumCO2_bau1960, fairShare350 = fairShare350_1960,
-		fairShare15C = fairShare15C_1960, fairShare2C = fairShare2C_1960, northAndRegions, 
-		northSouth, annex1) %>%
-	add_column(startDate = 1960, scenario = "BAU") %>%
-	relocate(startDate, scenario) %>%
-	rowwise() %>%
-	mutate(overshoot350 = cumCO2 / fairShare350,
-		overshoot15C = cumCO2 / fairShare15C,
-		overshoot2C = cumCO2 / fairShare2C) %>%
-	ungroup()
+overshoot9030_bau <- myData20 %>%
+  filter(date >= 2020) %>%
+  select(country, iso3c, date, cumCO2 = cumCO2_bau9030, fairShare350 = fairShare350_9030,
+         fairShare15C = fairShare15C_9030, fairShare2C = fairShare2C_9030, northAndRegions, 
+         northSouth, annex1) %>%
+  add_column(startDate = 1990, scenario = "BAU") %>%
+  relocate(startDate, scenario) %>%
+  rowwise() %>%
+  mutate(overshoot350 = cumCO2 / fairShare350,
+         overshoot15C = cumCO2 / fairShare15C,
+         overshoot2C = cumCO2 / fairShare2C) %>%
+  ungroup()
 
-overshoot1960_net0 <- myData20 %>%
-	filter(date >= 2020) %>%
-	select(country, iso3c, date, cumCO2 = cumCO2_net01960, fairShare350 = fairShare350_1960,
-		fairShare15C = fairShare15C_1960, fairShare2C = fairShare2C_1960, northAndRegions, 
-		northSouth, annex1) %>%
-	add_column(startDate = 1960, scenario = "NetZero") %>%
-	relocate(startDate, scenario) %>%
-	rowwise() %>%
-	mutate(overshoot350 = cumCO2 / fairShare350,
-		overshoot15C = cumCO2 / fairShare15C,
-		overshoot2C = cumCO2 / fairShare2C) %>%
-	ungroup()
+overshoot9030_net0 <- myData20 %>%
+  filter(date >= 2020) %>%
+  select(country, iso3c, date, cumCO2 = cumCO2_net09030, fairShare350 = fairShare350_9030,
+         fairShare15C = fairShare15C_9030, fairShare2C = fairShare2C_9030, northAndRegions, 
+         northSouth, annex1) %>%
+  add_column(startDate = 1990, scenario = "NetZero") %>%
+  relocate(startDate, scenario) %>%
+  rowwise() %>%
+  mutate(overshoot350 = cumCO2 / fairShare350,
+         overshoot15C = cumCO2 / fairShare15C,
+         overshoot2C = cumCO2 / fairShare2C) %>%
+  ungroup()
 
-overshoot1960_neg15C <- myData20 %>%
-	filter(date >= 2020) %>%
-	select(country, iso3c, date, cumCO2 = cumNeg15C_1960, fairShare350 = fairShare350_1960,
-		fairShare15C = fairShare15C_1960, fairShare2C = fairShare2C_1960, northAndRegions, 
-		northSouth, annex1) %>%
-	add_column(startDate = 1960, scenario = "Converge15C") %>%
-	relocate(startDate, scenario) %>%
-	rowwise() %>%
-	mutate(overshoot350 = NA,
-		overshoot15C = cumCO2 / fairShare15C,
-		overshoot2C = NA) %>%
-	ungroup()
+overshoot9030_neg15C <- myData20 %>%
+  filter(date >= 2020) %>%
+  select(country, iso3c, date, cumCO2 = cumNeg15C_9030, fairShare350 = fairShare350_9030,
+         fairShare15C = fairShare15C_9030, fairShare2C = fairShare2C_9030, northAndRegions, 
+         northSouth, annex1) %>%
+  add_column(startDate = 1990, scenario = "Converge15C") %>%
+  relocate(startDate, scenario) %>%
+  rowwise() %>%
+  mutate(overshoot350 = NA,
+         overshoot15C = cumCO2 / fairShare15C,
+         overshoot2C = NA) %>%
+  ungroup()
 
 #merge
-overshoot1960 <- rbind(overshoot1960_hist, overshoot1960_bau, overshoot1960_net0, overshoot1960_neg15C)
+overshoot9030 <- rbind(overshoot9030_hist, overshoot9030_bau, overshoot9030_net0, overshoot9030_neg15C)
 
-overshoot1960_ribbon <- myData20 %>%
-	filter(date >= 2020) %>%
-	select(country, iso3c, date, cumCO2_lwr = cumCO2_lwr661960, cumCO2_upr = cumCO2_upr661960,
-		fairShare350 = fairShare350_1960, fairShare15C = fairShare15C_1960, 
-		fairShare2C = fairShare2C_1960) %>%
-	add_column(startDate = 1960, scenario = "BAU") %>%
-	relocate(startDate, scenario) %>%
-	rowwise() %>%
-	mutate(overshoot350lwr = cumCO2_lwr / fairShare350,
-		overshoot350upr = cumCO2_upr / fairShare350,
-		overshoot15Clwr = cumCO2_lwr / fairShare15C,
-		overshoot15Cupr = cumCO2_upr / fairShare15C,
-		overshoot2Clwr = cumCO2_lwr / fairShare2C,
-		overshoot2Cupr = cumCO2_upr / fairShare2C) %>%
-	ungroup() %>%
-	select(-fairShare350, -fairShare15C, -fairShare2C)
+overshoot9030_ribbon <- myData20 %>%
+  filter(date >= 2020) %>%
+  select(country, iso3c, date, cumCO2_lwr = cumCO2_lwr669030, cumCO2_upr = cumCO2_upr669030,
+         fairShare350 = fairShare350_9030, fairShare15C = fairShare15C_9030, 
+         fairShare2C = fairShare2C_9030) %>%
+  add_column(startDate = 1990, scenario = "BAU") %>%
+  relocate(startDate, scenario) %>%
+  rowwise() %>%
+  mutate(overshoot350lwr = cumCO2_lwr / fairShare350,
+         overshoot350upr = cumCO2_upr / fairShare350,
+         overshoot15Clwr = cumCO2_lwr / fairShare15C,
+         overshoot15Cupr = cumCO2_upr / fairShare15C,
+         overshoot2Clwr = cumCO2_lwr / fairShare2C,
+         overshoot2Cupr = cumCO2_upr / fairShare2C) %>%
+  ungroup() %>%
+  select(-fairShare350, -fairShare15C, -fairShare2C)
 
-overshoot1960 <- left_join(overshoot1960, overshoot1960_ribbon, by=c("startDate", "scenario", "country",
-	"iso3c", "date")) %>%
-	relocate(northAndRegions, northSouth, annex1, .after=iso3c)
+overshoot9030 <- left_join(overshoot9030, overshoot9030_ribbon, by=c("startDate", "scenario", "country",
+                                                                     "iso3c", "date")) %>%
+  relocate(northAndRegions, northSouth, annex1, .after=iso3c)
 
 #clean up
-rm(overshoot1960_hist, overshoot1960_bau, overshoot1960_net0, overshoot1960_neg15C, overshoot1960_ribbon)
+rm(overshoot9030_hist, overshoot9030_bau, overshoot9030_net0, overshoot9030_neg15C, overshoot9030_ribbon)
 
 #------------------------------------------------------------------------------------------------------------
 # Calculate national cumulative overshoot from 1992 for each country (and world)
@@ -262,7 +340,8 @@ rm(overshoot1992_hist, overshoot1992_bau, overshoot1992_net0, overshoot1992_neg1
 #------------------------------------------------------------------------------------------------------------
 #merge 1850, 1960 and 1992 analyses and write to file
 #------------------------------------------------------------------------------------------------------------
-overshoot <- rbind(overshoot1992, overshoot1960, overshoot1850)
+# overshoot <- rbind(overshoot1992, overshoot1960, overshoot1850)
+overshoot <- rbind(overshoot1992, overshoot9030, overshoot1850)
 
 #write_csv(overshoot, "./myData/08_myDataOvershoot_v3.csv")
 
@@ -277,7 +356,8 @@ ratioStart350 <- overshoot %>%
 	select(startDate, country, iso3c, date, overshoot350) %>%
 	spread(startDate, overshoot350) %>%
 	rowwise() %>%
-	mutate(ratio1850over1960 = `1960`/`1850`) %>%
+	mutate(ratio1992over9030 = `9030`/`1992`) %>%
+  # mutate(ratio1850over1960 = `1960`/`1850`) %>%
 	ungroup() %>%
 	add_column(boundary2019 = "350ppm") %>%
 	select(-date)
@@ -287,7 +367,8 @@ ratioStart15C <- overshoot %>%
 	select(startDate, country, iso3c, date, overshoot15C) %>%
 	spread(startDate, overshoot15C) %>%
 	rowwise() %>%
-	mutate(ratio1850over1960 = `1960`/`1850`) %>%
+  mutate(ratio1992over9030 = `9030`/`1992`) %>%
+	# mutate(ratio1850over1960 = `1960`/`1850`) %>%
 	ungroup() %>%
 	add_column(boundary2019 = "1.5C") %>%
 	select(-date)
@@ -297,7 +378,8 @@ ratioStart2C <- overshoot %>%
 	select(startDate, country, iso3c, date, overshoot2C) %>%
 	spread(startDate, overshoot2C) %>%
 	rowwise() %>%
-	mutate(ratio1850over1960 = `1960`/`1850`) %>%
+	# mutate(ratio1850over1960 = `1960`/`1850`) %>%
+  mutate(ratio1992over9030 = `9030`/`1992`) %>%
 	ungroup() %>%
 	add_column(boundary2019 = "2C") %>%
 	select(-date)

@@ -9,7 +9,7 @@
 	col_double(), col_double(), col_double(), col_double(), col_double(), col_double(), col_double(), col_double(), 
 	col_double(), col_double(), col_double(), col_double(), col_double(), col_double(), col_double(), col_double()))
 
-#countryRegion <- read_csv("./CleanData/country_Region.csv") %>%
+countryRegion <- read_csv("./CleanData/country_Region.csv") %>%
 	select(iso3c=iso, eu)
 
 #---------------------------------------------------------------------
@@ -144,7 +144,7 @@ rm(countryRank2019, countryRank2050bau, countryRank2050netZ)
 
 
 #------------------------------------------------------------------------------------------------------
-#		VISUALISE FIGURE 3 1960–2019
+#		VISUALISE FIGURE 3 1960?2019
 #------------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
 #		OVERSHOOT / UNDERSHOOT PLOT WITH BAU AND NET ZERO BAR CHARTS IN 2050
@@ -171,7 +171,7 @@ histArea <- chartData %>%
   scale_x_continuous(limits=c(1960, 2020), breaks=seq(1960,2020,10), expand=c(0,0)) +
   scale_fill_manual(values = colours, limits=c("USA", "EU and UK", "Rest of global North", "Global South overshoot", "Global North undershoot",  
 	  "India", "China", "Sub-Sah. Africa", "Rest of global South")) + # "China overshoot",
-  labs(x="Year", y="Cumulative overshoot or undershoot of 1.5 °C fair share (Gt CO2)") +
+  labs(x="Year", y="Cumulative overshoot or undershoot of 1.5 ?C fair share (Gt CO2)") +
   theme_chart_SMALLM +
   theme(#plot.margin = unit(c(0.5,6.5,0.5,0.5), "lines"),
 	  panel.grid = element_blank(),
@@ -288,7 +288,7 @@ netZeroBar <- netZeroBar + theme(axis.title=element_blank())
 figure <- ggarrange(histArea, bauBar, netZeroBar, labels = c("a", "b", "c"), ncol = 3, widths=c(2,1,1), font.label=list(size=9))
 	
 annotate_figure(figure,
-	left = text_grob("Cumulative overshoot or undershoot of 1.5 ºC fair share (Gt CO2)", color="#636363", 
+	left = text_grob("Cumulative overshoot or undershoot of 1.5 ?C fair share (Gt CO2)", color="#636363", 
 	rot=90, size=7),
 	bottom = text_grob("Year", color="#636363", size=7))
 
@@ -296,7 +296,7 @@ annotate_figure(figure,
 
 
 #------------------------------------------------------------------------------------------------------
-#		VISUALISE FIGURE S3 1850–2050
+#		VISUALISE FIGURE S3 1850?2050
 #------------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
 #		OVERSHOOT / UNDERSHOOT PLOT WITH BAU AND NET ZERO BAR CHARTS IN 2050
@@ -444,7 +444,7 @@ netZeroBar <- netZeroBar + theme(axis.title=element_blank())
 figure <- ggarrange(histArea, bauBar, netZeroBar, labels = c("a", "b", "c"), ncol = 3, widths=c(2.2,1,1), font.label=list(size=9))
 	
 annotate_figure(figure,
-	left = text_grob("Cumulative overshoot or undershoot of 1.5 ºC fair share (Gt CO2)", color="#636363", 
+	left = text_grob("Cumulative overshoot or undershoot of 1.5 ?C fair share (Gt CO2)", color="#636363", 
 	rot=90, size=7),
 	bottom = text_grob("Year", color="#636363", size=7))
 
@@ -454,7 +454,7 @@ annotate_figure(figure,
 
 
 #------------------------------------------------------------------------------------------------------
-#		VISUALISE FIGURE S4 1992–2050
+#		VISUALISE FIGURE S4 1992?2050
 #------------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
 #		OVERSHOOT / UNDERSHOOT PLOT WITH BAU AND NET ZERO BAR CHARTS IN 2050
@@ -601,7 +601,7 @@ netZeroBar <- netZeroBar + theme(axis.title=element_blank())
 figure <- ggarrange(histArea, bauBar, netZeroBar, labels = c("a", "b", "c"), ncol = 3, widths=c(2.2,1,1), font.label=list(size=9))
 	
 annotate_figure(figure,
-	left = text_grob("Cumulative overshoot or undershoot of 1.5 ºC fair share (Gt CO2)", color="#636363", 
+	left = text_grob("Cumulative overshoot or undershoot of 1.5 ?C fair share (Gt CO2)", color="#636363", 
 	rot=90, size=7),
 	bottom = text_grob("Year", color="#636363", size=7))
 

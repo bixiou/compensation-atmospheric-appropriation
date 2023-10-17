@@ -1,0 +1,26 @@
+{
+    "id": "E5D73A7A",
+    "path": "~/www/compensation-atmospheric-appropriation/Analysis/scripts/12_figure1_WLD-GS-GN_R2.R",
+    "project_path": "12_figure1_WLD-GS-GN_R2.R",
+    "type": "r_source",
+    "hash": "3860749085",
+    "contents": "",
+    "dirty": true,
+    "created": 1697539299120.0,
+    "source_on_save": false,
+    "relative_order": 8,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "258,57",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1697535328,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1697550155970,
+    "read_only": false,
+    "read_only_alternatives": []
+}
