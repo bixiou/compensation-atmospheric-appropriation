@@ -1,3 +1,7 @@
+/myData can be deleted (all important things are in .RData)
+Results are in scripts/19_...R
+
+
 # compensation-atmospheric-appropriation
 This repository contains the source data, code, and figures generated in the following scientific publication:
 

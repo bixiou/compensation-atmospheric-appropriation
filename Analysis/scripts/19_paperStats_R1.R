@@ -143,6 +143,14 @@ sum(reparations1850$Reparations_med[reparations1850$Reparations_med > 0]) # 238T
 sum(reparations$Reparations_med[reparations$Reparations_med > 0]) # 191.7T (78.0T with 2020-30 prices instead of 2020-50)
 # 149.9T (61.0T with 2020-30 prices instead of 2020-50) if we use the 2°C instead of 1.5°C scenario
 
+######  Climate debt (in T$)  #####
+# Fair share     2C         1.5C    (/!\ Doesn't affect the scenario / emissions trajectory)
+#   Price    -30   -50   -30   -50  (Average price 2020-30: 135.3 vs. 2020-50: 288.5 $/tCO2) mean(myData21$AR6Cprice[myData21$iso3c=="USA" & myData21$date >= 2020 & myData21$date <= 2030])
+
+# 1960-2050   61   150    78   192
+# 1960-2030   58   144    75   187
+# 1990-2030   26    65    41   104
+# 1992-2050                    109
 
 #----------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------
