@@ -1,6 +1,6 @@
 {
     "id": "54D1BB85",
-    "path": "~/www/compensation-atmospheric-appropriation/Analysis/scripts/17_figure6-ReparationsPerCap_R2.R",
+    "path": "~/www/compensation_atmospheric_appropriation/Analysis/scripts/17_figure6-ReparationsPerCap_R2.R",
     "project_path": "17_figure6-ReparationsPerCap_R2.R",
     "type": "r_source",
     "hash": "2651420029",
@@ -12,8 +12,8 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "183,77",
-        "scrollLine": "152"
+        "cursorPosition": "61,0",
+        "scrollLine": "57"
     },
     "folds": "",
     "lastKnownWriteTime": 1697535328,

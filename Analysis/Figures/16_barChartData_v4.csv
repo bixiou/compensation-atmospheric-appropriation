@@ -11,17 +11,17 @@ startDate,group15C,cumReparations,cumReparationsLwr,cumReparationsUpr,share,type
 1850,Global South overshoot,21817120120458.05,16003770197323.69,33949519569784.1,9.15821353597146,Overemitters,"Global South overshoot
 ($22 trillion)","Global South overshoot
 (9%)",1850?2050
-1990,USA,48100737393260.5,35283902885134.49,74849334670998.66,45.55221375731897,Overemitters,"USA
-($48 trillion)","USA
+1990,USA,19564201590435.89,10987394816160.23,29137588871212.5,45.55221375731897,Overemitters,"USA
+($20 trillion)","USA
 (46%)",1850?2050
-1990,Rest of global North,22790223384443.637,16717582145422.543,35463761051780.664,21.800645289796943,Overemitters,"Rest of global North
-($23 trillion)","Rest of global North
+1990,Rest of global North,9269556949594.572,5205849137532.233,13805446553342.309,21.800645289796943,Overemitters,"Rest of global North
+($9 trillion)","Rest of global North
 (22%)",1850?2050
-1990,EU and UK,20104631820536.684,14747588397607.232,31284724457954,19.384548929049142,Overemitters,"EU and UK
-($20 trillion)","EU and UK
+1990,EU and UK,8177235758834.381,4592393784730.734,12178617795492.926,19.384548929049142,Overemitters,"EU and UK
+($8 trillion)","EU and UK
 (19%)",1850?2050
-1990,Global South overshoot,13308384235667.418,9762256513662.857,20709115069102.504,13.22280395592746,Overemitters,"Global South overshoot
-($13 trillion)","Global South overshoot
+1990,Global South overshoot,5412971321018.815,3039963208192.4907,8061710680829.077,13.22280395592746,Overemitters,"Global South overshoot
+($5 trillion)","Global South overshoot
 (13%)",1850?2050
 1992,USA,47736267190817.99,35016548746207.945,74282184277082.9,43.71014549550099,Overemitters,"USA
 ($48 trillion)","USA
@@ -50,17 +50,17 @@ startDate,group15C,cumReparations,cumReparationsLwr,cumReparationsUpr,share,type
 1850,China,37772594975477.3,27707778405513.516,58777760091214.64,15.855873217143976,Within fair shares,"China
 ($38 trillion)","China
 (16%)",1850?2050
-1990,Rest of global South,43130342913566.984,31637910627500.473,67114926842365.445,41.350621733480935,Within fair shares,"Rest of global South
-($43 trillion)","Rest of global South
+1990,Rest of global South,17542573547820.094,9852034123163.707,26126713805140.313,41.350621733480935,Within fair shares,"Rest of global South
+($18 trillion)","Rest of global South
 (41%)",1850?2050
-1990,India,33679860903107.29,24705586768334.633,52409075557385.77,32.29010237714952,Within fair shares,"India
-($34 trillion)","India
+1990,India,13698741931107.148,7693310937633.312,20401972888920.055,32.29010237714952,Within fair shares,"India
+($14 trillion)","India
 (32%)",1850?2050
-1990,Sub-Sah. Africa,23740469966451.395,17414627761217.834,36942435356816.09,22.760848327245746,Within fair shares,"Sub-Sah. Africa
-($24 trillion)","Sub-Sah. Africa
+1990,Sub-Sah. Africa,9656054469144.6,5422908894514.023,14381069625530.313,22.760848327245746,Within fair shares,"Sub-Sah. Africa
+($10 trillion)","Sub-Sah. Africa
 (23%)",1850?2050
-1990,China,3709287080174.511,2720917229187.824,5772004445272.68,3.5562278570462493,Within fair shares,"China
-($4 trillion)","China
+1990,China,1508692883438.0261,847292657972.222,2246944388061.885,3.5562278570462493,Within fair shares,"China
+($2 trillion)","China
 (4%)",1850?2050
 1992,Rest of global South,44718412898148.62,32802826388617.813,69586115189959.734,40.946819873715185,Within fair shares,"Rest of global South
 ($45 trillion)","Rest of global South

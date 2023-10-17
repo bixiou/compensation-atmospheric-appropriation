@@ -1,6 +1,6 @@
 {
     "id": "2A11B4D4",
-    "path": "~/www/compensation-atmospheric-appropriation/Analysis/scripts/3_estimateBAU.R",
+    "path": "~/www/compensation_atmospheric_appropriation/Analysis/scripts/3_estimateBAU.R",
     "project_path": "3_estimateBAU.R",
     "type": "r_source",
     "hash": "892248317",

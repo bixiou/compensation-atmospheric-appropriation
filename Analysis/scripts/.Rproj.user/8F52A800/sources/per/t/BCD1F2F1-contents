@@ -129,10 +129,11 @@ write_csv(reparations9030, "./SIdata/Reparations_9030.csv", na="")
 
 
 
-
+##### TO RUN ALTERNATIVES: files 16_ to 19_ #####
 # Cumulative compensations over 1990-2030
-sum(reparations9030$Reparations_med[reparations9030$Reparations_med > 0]) # 42.4T 
+sum(reparations9030$Reparations_med[reparations9030$Reparations_med > 0]) # 41.4T 
 # 104.3T if we took 2020-50 prices instead of 2020-29 - so high because 2030-50 emissions are close to zero in 1.5C scenario
+# 26.4T (or 64.8T with 2020-50 prices) if we use the 2°C instead of 1.5°C scenario
 
 # Cumulative compensations over 1992-2050
 sum(reparations1992$Reparations_med[reparations1992$Reparations_med > 0]) # 109T

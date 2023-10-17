@@ -1,6 +1,6 @@
 {
     "id": "6B3B2264",
-    "path": "~/www/compensation-atmospheric-appropriation/Analysis/scripts/2_checkVars.R",
+    "path": "~/www/compensation_atmospheric_appropriation/Analysis/scripts/2_checkVars.R",
     "project_path": "2_checkVars.R",
     "type": "r_source",
     "hash": "515624908",

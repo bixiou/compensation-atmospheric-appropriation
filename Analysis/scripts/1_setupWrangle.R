@@ -1,5 +1,5 @@
 #Set working directory in your local environment, load libraries, and data
-setwd("C:/Users/fabre/Documents/www/compensation-atmospheric-appropriation/Analysis/")
+setwd("C:/Users/fabre/Documents/www/compensation_atmospheric_appropriation/Analysis/")
 
 #load libraries
 library(jsonlite)

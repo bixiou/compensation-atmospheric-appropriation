@@ -1,6 +1,6 @@
 {
     "id": "024479B3",
-    "path": "~/www/compensation-atmospheric-appropriation/Analysis/scripts/4_calculateNetZero.R",
+    "path": "~/www/compensation_atmospheric_appropriation/Analysis/scripts/4_calculateNetZero.R",
     "project_path": "4_calculateNetZero.R",
     "type": "r_source",
     "hash": "2063489373",

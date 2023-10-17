@@ -1,6 +1,6 @@
 {
     "id": "8EECDDFB",
-    "path": "~/www/compensation-atmospheric-appropriation/Analysis/scripts/18_figure5-ReparationsGDPshare_R2.R",
+    "path": "~/www/compensation_atmospheric_appropriation/Analysis/scripts/18_figure5-ReparationsGDPshare_R2.R",
     "project_path": "18_figure5-ReparationsGDPshare_R2.R",
     "type": "r_source",
     "hash": "3385541778",
@@ -13,14 +13,14 @@
         "source_window_id": "",
         "Source": "Source",
         "cursorPosition": "74,0",
-        "scrollLine": "65"
+        "scrollLine": "72"
     },
     "folds": "",
     "lastKnownWriteTime": 1697535328,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1697553907461,
+    "last_content_update": 1697554584513,
     "read_only": false,
     "read_only_alternatives": []
 }
