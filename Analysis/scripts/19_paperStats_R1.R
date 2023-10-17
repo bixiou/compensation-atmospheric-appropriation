@@ -140,7 +140,8 @@ sum(reparations1992$Reparations_med[reparations1992$Reparations_med > 0]) # 109T
 # Cumulative compensations over 1850-2050
 sum(reparations1850$Reparations_med[reparations1850$Reparations_med > 0]) # 238T
 # Cumulative compensations over 1960-2050
-sum(reparations$Reparations_med[reparations$Reparations_med > 0]) # 192T
+sum(reparations$Reparations_med[reparations$Reparations_med > 0]) # 191.7T (78.0T with 2020-30 prices instead of 2020-50)
+# 149.9T (61.0T with 2020-30 prices instead of 2020-50) if we use the 2°C instead of 1.5°C scenario
 
 
 #----------------------------------------------------------------------------------
