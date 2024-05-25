@@ -1,4 +1,5 @@
 #Set working directory in your local environment, load libraries, and data
+# TODO Check Sanderson & O'Neil (2020), https://www.nature.com/articles/s41598-020-66275-4
 setwd("C:/Users/fabre/Documents/www/compensation_atmospheric_appropriation/Analysis/")
 
 #load libraries
